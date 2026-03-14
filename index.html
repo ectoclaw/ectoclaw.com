@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EctoClaw — Turn your coding agent into a personal AI assistant</title>
+  <meta name="description" content="EctoClaw bridges Telegram, Discord, WhatsApp and more to your coding agent. Message it like a person. It replies, remembers, and works.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .container { max-width: 640px; width: 100%; text-align: center; }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    h1 span { color: #e05252; }
+
+    p.tagline {
+      font-size: 1.15rem;
+      color: #8b949e;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .install-box {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .install-box code {
+      flex: 1;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.9rem;
+      color: #79c0ff;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: none;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      color: #8b949e;
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.6rem;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .copy-btn:hover { color: #e6edf3; border-color: #8b949e; }
+
+    .links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .links a {
+      color: #8b949e;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.15s;
+    }
+
+    .links a:hover { color: #e6edf3; }
+
+    footer {
+      margin-top: 3rem;
+      color: #484f58;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ecto<span>Claw</span></h1>
+    <p class="tagline">
+      Turn your coding agent into a personal AI assistant.<br>
+      Message it on Telegram, Discord, WhatsApp — it replies, remembers, and works.
+    </p>
+
+    <div class="install-box">
+      <code id="cmd">curl -sSL ectoclaw.com/install.sh | sh</code>
+      <button class="copy-btn" onclick="copy()">Copy</button>
+    </div>
+
+    <div class="links">
+      <a href="https://github.com/ectoclaw/ectoclaw">GitHub</a>
+      <a href="https://github.com/ectoclaw/ectoclaw/releases">Releases</a>
+      <a href="https://github.com/ectoclaw/ectoclaw#readme">Docs</a>
+    </div>
+
+    <footer>MIT License &mdash; EctoClaw contributors</footer>
+  </div>
+
+  <script>
+    function copy() {
+      navigator.clipboard.writeText(document.getElementById('cmd').textContent).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 1500);
+      });
+    }
+  </script>
+</body>
+</html>
