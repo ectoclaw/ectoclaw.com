@@ -82,8 +82,8 @@ latest_version() {
 # ── Already installed? ────────────────────────────────────────────────────────
 check_existing() {
   if command -v "$BIN" >/dev/null 2>&1; then
-    CURRENT="$("$BIN" version 2>/dev/null | grep -o '[0-9][^ ]*' | head -1 || true)"
-    warn "$BIN ${CURRENT:+v${CURRENT} }is already installed — upgrading to $VERSION"
+    CURRENT="$("$BIN" version 2>/dev/null || true)"
+    warn "$BIN ${CURRENT:+(${CURRENT}) }is already installed — upgrading to $VERSION"
   fi
 }
 
