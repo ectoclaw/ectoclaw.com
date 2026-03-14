@@ -82,20 +82,8 @@ latest_version() {
 # ── Already installed? ────────────────────────────────────────────────────────
 check_existing() {
   if command -v "$BIN" >/dev/null 2>&1; then
-    CURRENT="$("$BIN" version 2>/dev/null | head -1 || true)"
-    warn "$BIN is already installed: ${CURRENT:-unknown version}"
-    warn "Continuing will upgrade to $VERSION"
-    printf "Proceed? [y/N] "
-    # Skip prompt when piped (non-interactive).
-    if [ -t 0 ]; then
-      read -r answer
-      case "$answer" in
-        [yY]*) ;;
-        *) info "Aborted."; exit 0 ;;
-      esac
-    else
-      printf "non-interactive mode, proceeding\n"
-    fi
+    CURRENT="$("$BIN" version 2>/dev/null | grep -o '[0-9][^ ]*' | head -1 || true)"
+    warn "$BIN ${CURRENT:+v${CURRENT} }is already installed — upgrading to $VERSION"
   fi
 }
 
@@ -120,8 +108,7 @@ download_and_install() {
 # ── Verify ────────────────────────────────────────────────────────────────────
 verify() {
   command -v "$BIN" >/dev/null 2>&1 || die "Installation failed: $BIN not found in PATH"
-  INSTALLED="$("$BIN" version 2>/dev/null | head -1 || true)"
-  success "Installed: ${INSTALLED:-$BIN $VERSION}"
+  success "Installed $BIN $VERSION to $INSTALL_DIR/$BIN"
 }
 
 # ── Next steps ────────────────────────────────────────────────────────────────
