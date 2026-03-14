@@ -19,7 +19,7 @@ else
   RED=''; GREEN=''; YELLOW=''; BOLD=''; RESET=''
 fi
 
-info()    { printf "${BOLD}%s${RESET}\n" "$*"; }
+info()    { printf "• %s\n" "$*"; }
 success() { printf "${GREEN}✓${RESET} %s\n" "$*"; }
 warn()    { printf "${YELLOW}!${RESET} %s\n" "$*"; }
 die()     { printf "${RED}error:${RESET} %s\n" "$*" >&2; exit 1; }
@@ -83,7 +83,7 @@ latest_version() {
 check_existing() {
   if command -v "$BIN" >/dev/null 2>&1; then
     CURRENT="$("$BIN" version 2>/dev/null || true)"
-    warn "$BIN ${CURRENT:+(${CURRENT}) }is already installed — upgrading to $VERSION"
+    info "$BIN ${CURRENT:+(${CURRENT}) }already installed — upgrading to $VERSION"
   fi
 }
 
@@ -115,7 +115,7 @@ verify() {
 next_steps() {
   printf "\n"
   info "Next steps:"
-  printf "  1. Initialise config and workspace:\n"
+  printf "  1. Configure your workspace:\n"
   printf "     ${BOLD}%s onboard${RESET}\n\n" "$BIN"
   printf "  2. Install as a background service:\n"
   printf "     ${BOLD}sudo %s service install${RESET}\n" "$BIN"
